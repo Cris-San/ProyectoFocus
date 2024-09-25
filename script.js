@@ -9,16 +9,19 @@ const banner = document.querySelector('.app__image');
 
 //Eventos
 botonCorto.addEventListener("click", () => {
-    html.setAttribute('data-contexto', 'descanso-corto');
-    banner.setAttribute('src', './imagenes/descanso-corto.png');
+    cambiarContexto ('descanso-corto');
 });
 
 botonEnfoque.addEventListener("click", () => {
-    html.setAttribute('data-contexto', 'enfoque');
-    banner.setAttribute('src', '/imagenes/enfoque.png');
+    cambiarContexto ('enfoque');
 });
 
 botonLargo.addEventListener("click", () => {
-    html.setAttribute('data-contexto', 'descanso-largo');
-    banner.setAttribute('src', '/imagenes/descanso-largo.png');
+    cambiarContexto ('descanso-largo');
 });
+
+
+function cambiarContexto (contexto) {
+    html.setAttribute('data-contexto', contexto );
+    banner.setAttribute('src', `/imagenes/${contexto}.png`);
+}
