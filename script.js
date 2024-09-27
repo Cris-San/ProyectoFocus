@@ -5,28 +5,42 @@ const botonEnfoque = document.querySelector('.app__card-button--enfoque');
 const botonLargo = document.querySelector('.app__card-button--largo');
 const banner = document.querySelector('.app__image');
 const titulo = document.querySelector(".app__title");
-
+const botones = document.querySelectorAll('.app__card-button');
 
 
 
 //Eventos
 botonCorto.addEventListener("click", () => {
-    cambiarContexto ('descanso-corto');
+    cambiarContexto ('descanso-corto'); 
+    botonCorto.classList.add("active");
 });
 
 botonEnfoque.addEventListener("click", () => {
     cambiarContexto ('enfoque');
+    botonEnfoque.classList.add("active");
+
 });
 
 botonLargo.addEventListener("click", () => {
     cambiarContexto ('descanso-largo');
+    botonLargo.classList.add("active");
+
 });
 
 
+//Funciones
 function cambiarContexto (contexto) {
+    
+    //Remover enfoque de los botones
+    botones.forEach(contexto => {
+        contexto.classList.remove("active");
+    });
+
+    //Cambiar texto e imagen de acuerdo con el contexto
     html.setAttribute('data-contexto', contexto );
     banner.setAttribute('src', `/imagenes/${contexto}.png`);
 
+     //Estructura de control switch-case para agregar los textos.   
     switch (contexto) {
         case 'enfoque':
             titulo.innerHTML = `Optimiza tu productividad,<br>
