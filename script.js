@@ -10,13 +10,14 @@ const inputEnfoqueMusica = document.querySelector('#alternar-musica');
 const botonIniciarPausar = document.querySelector('#start-pause');
 const textoIniciarPausar = document.querySelector('#start-pause span');
 const iconoIniciarPausar = document.querySelector('.app__card-primary-butto-icon');
+const tiempoEnPantalla = document.querySelector('#timer');
 
 const musica = new Audio('./sonidos/luna-rise-part-one.mp3');
 const audioPlay = new Audio('./sonidos/play.wav');
 const audioPausa = new Audio('./sonidos/pause.mp3');
 const audioTiempoFinalizado = new Audio('./sonidos/beep.mp3');
 
-let tiempoTranscurridoEnSegundos = 5;
+let tiempoTranscurridoEnSegundos = 1500;
 let idIntervalo = null;
 
 //Eventos
@@ -93,9 +94,7 @@ const cuentaRegresiva = () => {
     textoIniciarPausar.textContent = "Pausar";
     iconoIniciarPausar.setAttribute('src', '/imagenes/pause.png');
     tiempoTranscurridoEnSegundos -= 1;
-    console.log('Temporizador: ' + tiempoTranscurridoEnSegundos); // Muestra el tiempo actual
-    console.log('Id: ' + idIntervalo);// Muestra el ID actual
-    
+    mostrarTiempo();
     
 }
 
@@ -116,5 +115,12 @@ function reiniciar() {
     idIntervalo = null;
     textoIniciarPausar.textContent = "Comenzar";
     iconoIniciarPausar.setAttribute('src', '/imagenes/play_arrow.png');
-
 }
+
+//Funcion para mostrar tiempo en pantalla
+function mostrarTiempo(){
+    const tiempo = tiempoTranscurridoEnSegundos;
+    tiempoEnPantalla.innerHTML = `${tiempo}`;
+}
+
+mostrarTiempo();
