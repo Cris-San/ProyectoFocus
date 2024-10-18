@@ -10,6 +10,10 @@ const inputEnfoqueMusica = document.querySelector('#alternar-musica');
 const musica = new Audio('./sonidos/luna-rise-part-one.mp3');
 const botonIniciarPausar = document.querySelector('#start-pause');
 
+const audioPlay = new Audio('./sonidos/play.wav');
+const audioPausa = new Audio('./sonidos/pause.mp3');
+const audioTiempoFinalizado = new Audio('./sonidos/beep.mp3');
+
 let tiempoTranscurridoEnSegundos = 5;
 let idIntervalo = null;
 
@@ -79,12 +83,15 @@ function cambiarContexto (contexto) {
 
 const cuentaRegresiva = () => {
     if (tiempoTranscurridoEnSegundos <= 0) {
+        audioTiempoFinalizado.play();
+        alert("TIEMPO FINALIZADO");
         reiniciar();
-        alert("TIEMPO fINALIZADO");
         return;
     }
     tiempoTranscurridoEnSegundos -= 1;
-    console.log('Temporizador: ' + tiempoTranscurridoEnSegundos);
+    console.log('Temporizador: ' + tiempoTranscurridoEnSegundos); // Muestra el tiempo actual
+    console.log('Id: ' + idIntervalo);// Muestra el ID actual
+    
     
 }
 
@@ -92,9 +99,11 @@ botonIniciarPausar.addEventListener("click", iniciarPausar);
 
 function iniciarPausar(){
     if (idIntervalo){
+        audioPausa.play();
         reiniciar();
-        return;
+        return;// retorno anticipado -- circuit breaker
     }
+    audioPausa.play();
     
     idIntervalo = setInterval(cuentaRegresiva, 1000);/**setInterval ejecuta cuentaRegresiva cada 1000 milisegundos (1 segundo).  */
 }
